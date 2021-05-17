@@ -4,11 +4,12 @@ from csv import reader
 
 
 def mark_attendance(match_name):
-    if not os.path.isfile('student_attendance.csv'):
-        f = open('student_attendance.csv', 'w+')
+    filename=f'Attendance/{datetime.now().strftime("%d-%B-%Y")}_attendance.csv'
+    if not os.path.isfile(filename):
+        f = open(filename, 'w+')
         f.write('Name,Time')
         f.close()
-    with open('student_attendance.csv', 'r+') as g:
+    with open(filename, 'r+') as g:
         name_list = []
         csv_reader = reader(g)
         for line in csv_reader:
@@ -20,4 +21,7 @@ def mark_attendance(match_name):
 
 
 if __name__ == "__main__":
+    # print(datetime.now())
     mark_attendance('ABILASH_010')
+    mark_attendance('GARYVEE_003')
+    mark_attendance('VISHENLAKHIANI_009')

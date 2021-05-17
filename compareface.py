@@ -4,7 +4,6 @@ import cv2
 import face_recognition
 import mark_Attendance as mk
 
-
 class CompareFace:
 
     def __init__(self):
@@ -32,6 +31,24 @@ class CompareFace:
                     if match[match_index]:
                         name = self.student_details[match_index].upper()
                         mk.mark_attendance(name)
+                        y1, x2, y2, x1 = face_loc
+                        y1, x2, y2, x1 = y1*4, x2*4, y2*4, x1*4
+                        cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                        cv2.rectangle(img, (x1, y2-35), (x2, y2), (0, 255, 0), cv2.FILLED)
+                        cv2.putText(img, name, (x1+6, y2-6), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+                    else:
+                        name = "Unknown Person"
+                        print(name)
+                        y1, x2, y2, x1 = face_loc
+                        y1, x2, y2, x1 = y1 * 2, x2 * 2, y2 * 2, x1 * 2
+                        cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                        cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
+                        cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
+                cv2.imshow("Recognition", img)
+                # cv2.waitKey(1)
+                if cv2.waitKey(1) & 0xFF == ord('q'):
+                    cv2.destroyWindow('Recognition')
+                    break
         except KeyboardInterrupt as e:
             print("User interrupted")
         else:
