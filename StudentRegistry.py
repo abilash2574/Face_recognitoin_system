@@ -6,6 +6,7 @@ from tkcalendar import DateEntry
 import data_Register as dr
 from os import path
 
+
 class _DateEntry(DateEntry):
 
     def _select(self, event=None):
@@ -41,14 +42,12 @@ class StudentRegistry(tk.Frame):
         # dob_entry = ttk.Entry(self, textvariable=self.dob_)
         dob_entry.grid(row=2, column=1, sticky=tk.W)
 
-
         self.reg_ = tk.IntVar(value=400)
         reg_label = ttk.Label(self, text='Enter Registration No')
         reg_label.grid(row=3, column=0, sticky=tk.W)
         reg_entry = ttk.Entry(self, textvariable=self.reg_)
         reg_entry.config(validate="key", validatecommand=(self.register(self.checkno), '%S'))
         reg_entry.grid(row=4, column=0, sticky=tk.W)
-
 
         self.email_ = tk.StringVar()
         email_label = ttk.Label(self, text='Enter Email Id')
@@ -123,7 +122,6 @@ class StudentRegistry(tk.Frame):
         dr.start_data_registry(dir_path)
         if path.exists('Student_data.csv'):
             self.status_.set("Updated Students Data")
-
 
     def reset(self):
         self.reg_.set(0)
